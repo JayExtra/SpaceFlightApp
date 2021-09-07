@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Launch Library API</string>
+    <string name="rocket_name_mission">Rocket name | Mission</string>
+    <string name="organisation_nation">Organisation / Nation</string>
+    <string name="launch_pad_launch_complex">Launch pad / launch complex</string>
+    <string name="t_timer">T-  00  :  00  :  00  :  00</string>
+    <string name="go_sus">Go/Sus</string>
+    <string name="remind_me">Remind me</string>
+    <string name="days_hours_minutes_seconds">Days    Hours    Minutes    Seconds</string>
+    <string name="description">description</string>
+    <string name="image_description">this is the image provided by te api</string>
+</resources>
