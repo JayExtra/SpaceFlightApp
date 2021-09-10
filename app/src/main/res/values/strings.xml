@@ -9,4 +9,7 @@
     <string name="days_hours_minutes_seconds">Days    Hours    Minutes    Seconds</string>
     <string name="description">description</string>
     <string name="image_description">this is the image provided by te api</string>
+    <string name="upcoming">upcoming</string>
+    <string name="previous">previous</string>
+    <string name="tab_layout_for_homepage">tab layout for homepage</string>
 </resources>

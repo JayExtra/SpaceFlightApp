@@ -9,4 +9,9 @@
     <color name="midnight_black">#121212</color>
     <color name="nimbus_black">#1E1E1E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="success_green">#42f545</color>
+    <color name="blue">#12b4ff</color>
+    <color name="pending_orange">#ff8903</color>
+    <color name="failure_red">#ff0b03</color>
+
 </resources>
