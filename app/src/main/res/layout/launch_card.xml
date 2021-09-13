@@ -71,11 +71,12 @@
                 android:id="@+id/countDownTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/t_timer"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,14 +96,14 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/launchPadTv"
-                app:layout_constraintVertical_bias="0.946" />
+                app:layout_constraintTop_toBottomOf="@+id/descrptTxt"
+                app:layout_constraintVertical_bias="0.89" />
 
             <TextView
                 android:id="@+id/remindTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-light"
@@ -114,12 +115,12 @@
 
             <TextView
                 android:id="@+id/daysHrsTxt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="Days        Hours     Minutes     Seconds "
+                android:layout_marginStart="100dp"
+                android:text="Days          Hours         Min            Sec "
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/countDownTv"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/countDownTv" />
 
             <TextView
@@ -139,7 +140,7 @@
                 android:id="@+id/remindChip"
                 android:layout_width="77dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-medium"
@@ -160,15 +161,16 @@
 
             <TextView
                 android:id="@+id/dateText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="Date"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/daysHrsTxt"
-                app:layout_constraintHorizontal_bias="0.48"
-                app:layout_constraintStart_toStartOf="@+id/daysHrsTxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/daysHrsTxt" />
 
             <TextView
@@ -188,13 +190,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
                 android:text="message"
-                android:textAlignment="textStart"
                 android:textColor="@color/white"
-                android:visibility="gone"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/launchPadTv" />
+                app:layout_constraintTop_toBottomOf="@+id/launchPadTv"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
