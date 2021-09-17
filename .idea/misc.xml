@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/drawable/circle_progress.xml" value="0.264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/drawable/circle_shape.xml" value="0.11944444444444445" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/drawable/ic_baseline_cell_wifi.xml" value="0.2786458333333333" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.1" />
@@ -17,6 +18,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/layout/fragment_previous_launches.xml" value="0.24615384615384617" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/layout/fragment_upcoming_launches.xml" value="0.24615384615384617" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/layout/launch_card.xml" value="0.4002808988764045" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/layout/launch_details.xml" value="0.3452157598499062" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/layout/load_state_footer.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/layout/toolbar.xml" value="0.2484375" />
         <entry key="..\:/Users/user/AndroidStudioProjects/LaunchLibraryAPI/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

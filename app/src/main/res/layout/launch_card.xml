@@ -111,7 +111,8 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/remindChip"
-                app:layout_constraintTop_toBottomOf="@+id/dateText" />
+                app:layout_constraintTop_toBottomOf="@+id/dateText"
+                app:layout_constraintVertical_bias="0.63" />
 
             <TextView
                 android:id="@+id/daysHrsTxt"
@@ -189,10 +190,13 @@
                 android:id="@+id/descrptTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
+                android:ellipsize="end"
+                android:lines="4"
+                android:padding="8dp"
                 android:text="message"
+                android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"

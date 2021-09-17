@@ -7,8 +7,6 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
@@ -26,7 +24,9 @@ import com.dev.james.launchlibraryapi.models.LaunchList
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class LaunchListAdapter : PagingDataAdapter<LaunchList , LaunchListAdapter.LaunchListViewHolder>(DiffCallback()) {
+class LaunchListAdapter(
+    private val action : (String? , Boolean) -> Unit,
+) : PagingDataAdapter<LaunchList , LaunchListAdapter.LaunchListViewHolder>(DiffCallback()) {
 
     private val TAG = "LaunchListAdapter"
     private lateinit var  context : Context
@@ -66,7 +66,16 @@ class LaunchListAdapter : PagingDataAdapter<LaunchList , LaunchListAdapter.Launc
                         loadImage(launch , binding)
                         setTimer(launch.launchDate , binding)
 
+                        statusTv.setOnClickListener {
+                            action.invoke(launch.status?.name , false)
+                        }
+
+                        root.setOnClickListener {
+                            action.invoke(null , true)
+                        }
+
                     }
+
 
                 }
 
@@ -109,6 +118,14 @@ class LaunchListAdapter : PagingDataAdapter<LaunchList , LaunchListAdapter.Launc
 
                 if(launch.status?.id == 2 ){
                     statusTv.setTextColor(Color.BLUE)
+                    countDownTv.setTextColor(Color.WHITE)
+                    countDownTv.isVisible = true
+                    date2Txt.isVisible = false
+                    descrptTxt.isVisible = false
+                    daysHrsTxt.isVisible = true
+                    dateText.isVisible = true
+                    remindTxt.isVisible = true
+                    remindChip.isVisible = true
                 }
                 if(launch.status?.id == 3 || launch.status?.id == 4  ){
 
@@ -137,11 +154,27 @@ class LaunchListAdapter : PagingDataAdapter<LaunchList , LaunchListAdapter.Launc
                 }
                 if(launch.status?.id == 8 ){
                     statusTv.setTextColor(Color.YELLOW)
+                    countDownTv.setTextColor(Color.WHITE)
+                    countDownTv.isVisible = true
+                    date2Txt.isVisible = false
+                    descrptTxt.isVisible = false
+                    daysHrsTxt.isVisible = true
+                    dateText.isVisible = true
+                    remindTxt.isVisible = true
+                    remindChip.isVisible = true
                 }
 
                 if(launch.status?.id == 1){
                     statusTv.setTextColor(Color.CYAN)
                     //countDownTv.text = context.getText(R.string.vehicle_liftoff)
+                    countDownTv.setTextColor(Color.WHITE)
+                    countDownTv.isVisible = true
+                    date2Txt.isVisible = false
+                    descrptTxt.isVisible = false
+                    daysHrsTxt.isVisible = true
+                    dateText.isVisible = true
+                    remindTxt.isVisible = true
+                    remindChip.isVisible = true
                 }
             }
         }

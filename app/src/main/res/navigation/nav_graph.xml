@@ -9,5 +9,24 @@
         android:id="@+id/homeFragment"
         android:name="com.dev.james.launchlibraryapi.features.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_launchDetailsFragment2"
+            app:destination="@id/launchDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/launchDetailsFragment"
+        android:name="com.dev.james.launchlibraryapi.features.ui.LaunchDetailsFragment"
+        android:label="launch_details"
+        tools:layout="@layout/launch_details" />
+    <fragment
+        android:id="@+id/previousFragment"
+        android:name="com.dev.james.launchlibraryapi.features.ui.PreviousFragment"
+        android:label="fragment_previous_launches"
+        tools:layout="@layout/fragment_previous_launches" />
+    <fragment
+        android:id="@+id/upcomingFragment"
+        android:name="com.dev.james.launchlibraryapi.features.ui.UpcomingFragment"
+        android:label="fragment_upcoming_launches"
+        tools:layout="@layout/fragment_upcoming_launches" />
 </navigation>

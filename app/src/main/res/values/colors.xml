@@ -13,5 +13,8 @@
     <color name="blue">#12b4ff</color>
     <color name="pending_orange">#ff8903</color>
     <color name="failure_red">#ff0b03</color>
+    <color name="starting_progress_color">#9a32a8</color>
+    <color name="ending_progress_color">#a81d52</color>
+
 
 </resources>

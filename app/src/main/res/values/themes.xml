@@ -31,6 +31,18 @@
         <item name="colorAccent">@color/white</item> <!-- Whatever color you want-->
     </style>
 
+    <style name="toolbar_theme" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+
+        <item name="android:textColorPrimary">@color/white</item>
+
+        <item name="colorOnPrimary">@color/nimbus_black</item>
+    </style>
+
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/circle_progress</item>
+    </style>
+
 
 
 </resources>
