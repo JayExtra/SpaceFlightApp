@@ -1,7 +1,10 @@
 package com.dev.james.launchlibraryapi.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Mission(
     val id : Int,
     val name : String,
@@ -10,4 +13,4 @@ data class Mission(
     val designator : String?,
     val orbit : Orbit?
 
-)
+): Parcelable

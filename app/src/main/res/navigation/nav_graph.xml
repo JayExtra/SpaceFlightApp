@@ -18,7 +18,17 @@
         android:id="@+id/launchDetailsFragment"
         android:name="com.dev.james.launchlibraryapi.features.ui.LaunchDetailsFragment"
         android:label="launch_details"
-        tools:layout="@layout/launch_details" />
+        tools:layout="@layout/launch_details" >
+        <argument
+            android:name="single_launch_result"
+            app:argType="com.dev.james.launchlibraryapi.models.LaunchList" />
+        <argument
+            android:name="launch_image_url"
+            app:argType="string" />
+        <argument
+            android:name="launch_name"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/previousFragment"
         android:name="com.dev.james.launchlibraryapi.features.ui.PreviousFragment"

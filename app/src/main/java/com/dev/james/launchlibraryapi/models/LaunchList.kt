@@ -1,10 +1,13 @@
 package com.dev.james.launchlibraryapi.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Parcelize
 data class LaunchList(
     val id : String,
     val url : String,
@@ -24,7 +27,7 @@ data class LaunchList(
     val pad : LaunchPad,
     val image : String,
     val probability : Int?
-){
+) : Parcelable{
     private val dateFormat : SimpleDateFormat
         get() =
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")

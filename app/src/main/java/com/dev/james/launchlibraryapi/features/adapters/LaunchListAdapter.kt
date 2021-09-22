@@ -25,7 +25,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class LaunchListAdapter(
-    private val action : (String? , Boolean) -> Unit,
+    private val action : ( LaunchList? , String? , String? , String?) -> Unit,
 ) : PagingDataAdapter<LaunchList , LaunchListAdapter.LaunchListViewHolder>(DiffCallback()) {
 
     private val TAG = "LaunchListAdapter"
@@ -67,11 +67,11 @@ class LaunchListAdapter(
                         setTimer(launch.launchDate , binding)
 
                         statusTv.setOnClickListener {
-                            action.invoke(launch.status?.name , false)
+                            action.invoke(null , launch.status?.name , null , null)
                         }
 
                         root.setOnClickListener {
-                            action.invoke(null , true)
+                            action.invoke(launch , null , launch.image , launch.name  )
                         }
 
                     }

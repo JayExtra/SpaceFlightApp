@@ -16,6 +16,7 @@ import com.dev.james.launchlibraryapi.databinding.FragmentUpcomingLaunchesBindin
 import com.dev.james.launchlibraryapi.features.adapters.FooterLoadStateAdapter
 import com.dev.james.launchlibraryapi.features.adapters.LaunchListAdapter
 import com.dev.james.launchlibraryapi.features.viewmodels.LaunchListViewModel
+import com.dev.james.launchlibraryapi.models.LaunchList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -27,15 +28,21 @@ import kotlinx.coroutines.launch
 class UpcomingFragment : Fragment(R.layout.fragment_upcoming_launches) {
     private val viewModel : LaunchListViewModel by viewModels()
     private lateinit var binding : FragmentUpcomingLaunchesBinding
-    private val launchListAdapter = LaunchListAdapter{ message , b ->
+    private val launchListAdapter = LaunchListAdapter{ launchItem, message , image , missionName ->
         showSnackbar(message)
-        navigate(b)
+        navigate(launchItem , image , missionName)
 
     }
 
-    private fun navigate(b: Boolean) {
-        if (b){
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_launchDetailsFragment2)
+    private fun navigate(launch: LaunchList?, image: String?, missionName: String?) {
+        launch?.let {
+            //navigate to destination with arguments
+            val action = HomeFragmentDirections.actionHomeFragmentToLaunchDetailsFragment2(
+                launch,
+                image!!,
+                missionName!!
+            )
+            findNavController().navigate(action)
         }
     }
 

@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,7 @@ import com.dev.james.launchlibraryapi.databinding.FragmentPreviousLaunchesBindin
 import com.dev.james.launchlibraryapi.features.adapters.FooterLoadStateAdapter
 import com.dev.james.launchlibraryapi.features.adapters.LaunchListAdapter
 import com.dev.james.launchlibraryapi.features.viewmodels.LaunchListViewModel
+import com.dev.james.launchlibraryapi.models.LaunchList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -28,17 +28,21 @@ import kotlinx.coroutines.launch
 class PreviousFragment : Fragment(R.layout.fragment_previous_launches) {
     private val viewModel : LaunchListViewModel by viewModels()
     private lateinit var binding : FragmentPreviousLaunchesBinding
-    private val launchListAdapter = LaunchListAdapter { status , b  ->
+    private val launchListAdapter = LaunchListAdapter { launchItem , status , image , missionName  ->
         showSnackBar(status)
-        navigate(b)
+        navigate(launchItem , image , missionName)
     }
 
-    private fun navigate(b: Boolean) {
-        if(b){
-            binding.root.findNavController().navigate(
-                R.id.action_homeFragment_to_launchDetailsFragment2
-            )
-        }
+    private fun navigate(launch: LaunchList?, image: String?, missionName: String?) {
+       launch?.let {
+            //navigate with arguments
+           val action = HomeFragmentDirections.actionHomeFragmentToLaunchDetailsFragment2(
+               launch,
+               image!!,
+               missionName!!
+           )
+           findNavController().navigate(action)
+       }
     }
 
     private val TAG ="PreviousFragment"

@@ -43,6 +43,7 @@
                 app:subtitleTextColor="@color/white"
                 app:titleTextColor="@color/white" />
 
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -59,7 +60,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView1"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
@@ -76,38 +77,38 @@
                     android:layout_height="match_parent">
 
 
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/readMoreButton"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="32dp"
-                        android:text="Location"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Read more"
+                        android:textAllCaps="false"
+                        android:textColor="@color/ending_progress_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/launchPadNameTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="7dp"
                         android:layout_marginEnd="32dp"
-                        android:text="TextView"
+                        android:text="pad"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                        app:layout_constraintTop_toBottomOf="@+id/launchLocationText" />
 
                     <TextView
-                        android:id="@+id/textView16"
+                        android:id="@+id/totalLandingsCenter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
@@ -115,11 +116,11 @@
                         android:text="0"
                         android:textColor="@color/ending_progress_color"
                         android:textSize="34sp"
-                        app:layout_constraintStart_toStartOf="@+id/textView14"
-                        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                        app:layout_constraintStart_toStartOf="@+id/launchLocationText"
+                        app:layout_constraintTop_toBottomOf="@+id/launchPadNameTxt" />
 
                     <TextView
-                        android:id="@+id/textView19"
+                        android:id="@+id/totalLaunchesPad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -128,13 +129,13 @@
                         android:text="0"
                         android:textColor="@color/ending_progress_color"
                         android:textSize="34sp"
-                        app:layout_constraintEnd_toStartOf="@+id/textView18"
-                        app:layout_constraintStart_toEndOf="@+id/textView16"
-                        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                        app:layout_constraintEnd_toStartOf="@+id/totalLandings"
+                        app:layout_constraintStart_toEndOf="@+id/totalLandingsCenter"
+                        app:layout_constraintTop_toBottomOf="@+id/launchPadNameTxt" />
 
 
                     <TextView
-                        android:id="@+id/textView18"
+                        android:id="@+id/totalLandings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -142,8 +143,8 @@
                         android:text="0"
                         android:textColor="@color/ending_progress_color"
                         android:textSize="34sp"
-                        app:layout_constraintEnd_toEndOf="@+id/textView15"
-                        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                        app:layout_constraintEnd_toEndOf="@+id/launchPadNameTxt"
+                        app:layout_constraintTop_toBottomOf="@+id/launchPadNameTxt" />
 
                     <TextView
                         android:id="@+id/textView17"
@@ -152,22 +153,22 @@
                         android:fontFamily="sans-serif-light"
                         android:text="Total launches"
                         android:textColor="@color/white"
-                        android:textSize="10sp"
-                        app:layout_constraintEnd_toEndOf="@+id/textView16"
-                        app:layout_constraintStart_toStartOf="@+id/textView16"
-                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/totalLandingsCenter"
+                        app:layout_constraintStart_toStartOf="@+id/totalLandingsCenter"
+                        app:layout_constraintTop_toBottomOf="@+id/totalLandingsCenter" />
 
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Total launches (pad)"
+                        android:text="Total launches \n    ( this pad)"
                         android:textColor="@color/white"
-                        android:textSize="10sp"
-                        app:layout_constraintEnd_toEndOf="@+id/textView19"
-                        app:layout_constraintStart_toStartOf="@+id/textView19"
-                        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/totalLaunchesPad"
+                        app:layout_constraintStart_toStartOf="@+id/totalLaunchesPad"
+                        app:layout_constraintTop_toBottomOf="@+id/totalLaunchesPad" />
 
                     <TextView
                         android:id="@+id/textView20"
@@ -176,66 +177,65 @@
                         android:fontFamily="sans-serif-light"
                         android:text="Total landings"
                         android:textColor="@color/white"
-                        android:textSize="10sp"
-                        app:layout_constraintEnd_toEndOf="@+id/textView18"
-                        app:layout_constraintStart_toStartOf="@+id/textView18"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/totalLandings"
+                        app:layout_constraintStart_toStartOf="@+id/totalLandings"
+                        app:layout_constraintTop_toBottomOf="@+id/totalLandings" />
 
-                    <Button
-                        android:id="@+id/button"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/launchLocationText"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="read more"
-                        android:textColor="@color/ending_progress_color"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:text="Location"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/rocketTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Rocket"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/cardView2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                app:layout_constraintEnd_toEndOf="@+id/rocketCard"
+                app:layout_constraintStart_toStartOf="@+id/rocketCard"
+                app:layout_constraintTop_toBottomOf="@+id/rocketCard" />
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:text="Orbit"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-            <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/orbitTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:text="Orbit"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/orbitCard"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/orbitCard"
+                app:layout_constraintTop_toBottomOf="@+id/orbitCard" />
+
+            <TextView
+                android:id="@+id/locationTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Location"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/cardView4"
-                app:layout_constraintHorizontal_bias="0.813"
-                app:layout_constraintStart_toEndOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+                app:layout_constraintEnd_toEndOf="@+id/launchLocationCard"
+                app:layout_constraintStart_toStartOf="@+id/launchLocationCard"
+                app:layout_constraintTop_toBottomOf="@+id/launchLocationCard" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -246,12 +246,12 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Mission"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="34sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintTop_toBottomOf="@+id/failureReasonTxt" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/missionNameTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -260,13 +260,14 @@
                 android:fontFamily="sans-serif-light"
                 android:text="TextView"
                 android:textColor="@color/white"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/missionDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -275,10 +276,10 @@
                 android:fontFamily="sans-serif-light"
                 android:text="TextView"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toBottomOf="@+id/missionNameTxt" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -288,7 +289,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Agency"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="34sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
@@ -297,15 +298,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:text="Status"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="34sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/statusDescriptionTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -313,12 +314,13 @@
                 android:layout_marginEnd="16dp"
                 android:text="description"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/failureReasonTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -327,9 +329,9 @@
                 android:text="reason"
                 android:textColor="@color/white"
                 android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/textView11"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintEnd_toEndOf="@+id/statusDescriptionTxt"
+                app:layout_constraintStart_toStartOf="@+id/statusDescriptionTxt"
+                app:layout_constraintTop_toBottomOf="@+id/statusDescriptionTxt" />
 
             <View
                 android:id="@+id/divider"
@@ -339,10 +341,10 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/rocketTxt" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView4"
+                android:id="@+id/launchLocationCard"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="32dp"
@@ -350,8 +352,8 @@
                 android:background="@drawable/circle_shape"
                 app:cardCornerRadius="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cardView3"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintStart_toEndOf="@+id/orbitCard"
+                app:layout_constraintTop_toBottomOf="@+id/timerCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -373,7 +375,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/timerCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -466,10 +468,10 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/probabilityBar"
-                        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                        app:layout_constraintTop_toBottomOf="@+id/dateTvCard" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/dateTvCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -484,7 +486,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
+                android:id="@+id/orbitCard"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="32dp"
@@ -492,10 +494,10 @@
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/circle_shape"
                 app:cardCornerRadius="35dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView4"
+                app:layout_constraintEnd_toStartOf="@+id/launchLocationCard"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toEndOf="@+id/cardView2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintStart_toEndOf="@+id/rocketCard"
+                app:layout_constraintTop_toBottomOf="@+id/timerCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -504,7 +506,7 @@
 
                     <ImageView
                         android:id="@+id/imageView3"
-                        android:layout_width="match_parent"
+                        android:layout_width="500dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -516,7 +518,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/rocketCard"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="32dp"
@@ -524,10 +526,10 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/circle_shape"
                 app:cardCornerRadius="35dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView3"
+                app:layout_constraintEnd_toStartOf="@+id/orbitCard"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintTop_toBottomOf="@+id/timerCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -536,7 +538,7 @@
 
                     <ImageView
                         android:id="@+id/imageView4"
-                        android:layout_width="match_parent"
+                        android:layout_width="500dp"
                         android:layout_height="match_parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -566,7 +568,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/missionDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

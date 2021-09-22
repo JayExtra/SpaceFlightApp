@@ -14,4 +14,5 @@
     <string name="tab_layout_for_homepage">tab layout for homepage</string>
     <string name="updated_timer">   T-  %02d : %02d : %02d : %02d</string>
     <string name="vehicle_liftoff">Vehicle liftoff!</string>
+    <string name="update_probability"> %02d %</string>
 </resources>
