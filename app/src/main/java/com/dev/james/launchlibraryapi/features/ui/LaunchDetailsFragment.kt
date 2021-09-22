@@ -18,11 +18,9 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = LaunchDetailsBinding.bind(view)
 
-        //setUpToolbar()
+        setUpToolbar()
 
     }
-
-    /**
 
     private fun setUpToolbar() {
         val toolbar = binding.launchDetailsToolbar as Toolbar
@@ -38,5 +36,4 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
 
     }
 
-    **/
 }

@@ -124,8 +124,7 @@ class LaunchListAdapter(
                     descrptTxt.isVisible = false
                     daysHrsTxt.isVisible = true
                     dateText.isVisible = true
-                    remindTxt.isVisible = true
-                    remindChip.isVisible = true
+
                 }
                 if(launch.status?.id == 3 || launch.status?.id == 4  ){
 
@@ -133,8 +132,6 @@ class LaunchListAdapter(
                     countDownTv.isVisible = false
                     daysHrsTxt.isVisible = false
                     dateText.isVisible = false
-                    remindTxt.isVisible = false
-                    remindChip.isVisible = false
                     date2Txt.isVisible = true
                     descrptTxt.isVisible = true
                     descrptTxt.text = launch.mission?.description
@@ -145,8 +142,7 @@ class LaunchListAdapter(
                     countDownTv.isVisible = false
                     daysHrsTxt.isVisible = false
                     dateText.isVisible = false
-                    remindTxt.isVisible = false
-                    remindChip.isVisible = false
+
                     date2Txt.isVisible = true
                     descrptTxt.isVisible = true
                     descrptTxt.text = launch.mission?.description
@@ -160,8 +156,6 @@ class LaunchListAdapter(
                     descrptTxt.isVisible = false
                     daysHrsTxt.isVisible = true
                     dateText.isVisible = true
-                    remindTxt.isVisible = true
-                    remindChip.isVisible = true
                 }
 
                 if(launch.status?.id == 1){
@@ -173,8 +167,7 @@ class LaunchListAdapter(
                     descrptTxt.isVisible = false
                     daysHrsTxt.isVisible = true
                     dateText.isVisible = true
-                    remindTxt.isVisible = true
-                    remindChip.isVisible = true
+
                 }
             }
         }

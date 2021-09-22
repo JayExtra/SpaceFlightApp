@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/launchImage"
                 android:layout_width="match_parent"
-                android:layout_height="208dp"
+                android:layout_height="250dp"
                 android:background="@color/white"
                 android:contentDescription="@string/image_description"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -29,41 +29,58 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_image_24" />
 
+            <ProgressBar
+                android:id="@+id/loadImageProgress"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="76dp"
+                app:layout_constraintEnd_toEndOf="@+id/launchImage"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="@+id/launchImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/nameTv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/rocket_name_mission"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/launchImage" />
 
             <TextView
                 android:id="@+id/lsProviderTv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/organisation_nation"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameTv" />
 
             <TextView
                 android:id="@+id/launchPadTv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/launch_pad_launch_complex"
                 android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lsProviderTv" />
 
@@ -88,31 +105,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
                 android:text="@string/go_sus"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descrptTxt"
-                app:layout_constraintVertical_bias="0.89" />
-
-            <TextView
-                android:id="@+id/remindTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/remind_me"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/remindChip"
-                app:layout_constraintTop_toBottomOf="@+id/dateText"
-                app:layout_constraintVertical_bias="0.63" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/daysHrsTxt"
@@ -137,42 +136,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/launchPadTv" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/remindChip"
-                android:layout_width="77dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif-medium"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateText" />
-
-            <ProgressBar
-                android:id="@+id/loadImageProgress"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
-                app:layout_constraintEnd_toEndOf="@+id/launchImage"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="@+id/launchImage"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/dateText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
                 android:text="Date"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/daysHrsTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/daysHrsTxt"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/date2Txt"
@@ -182,7 +161,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Date2"
                 android:textColor="@color/white"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/launchPadTv" />
 
@@ -190,10 +169,11 @@
                 android:id="@+id/descrptTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
                 android:ellipsize="end"
-                android:lines="4"
+                android:lines="6"
                 android:padding="8dp"
                 android:text="message"
                 android:textAlignment="textStart"
@@ -203,8 +183,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/launchPadTv"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/date2Txt" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
