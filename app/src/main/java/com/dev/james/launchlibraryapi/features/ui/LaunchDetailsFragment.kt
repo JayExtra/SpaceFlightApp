@@ -3,20 +3,16 @@ package com.dev.james.launchlibraryapi.features.ui
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.graphics.toColor
 import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dev.james.launchlibraryapi.R
-import com.dev.james.launchlibraryapi.databinding.LaunchCardBinding
 import com.dev.james.launchlibraryapi.databinding.LaunchDetailsBinding
 import com.dev.james.launchlibraryapi.models.LaunchList
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,8 +33,6 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
         val launchItem = argument?.singleLaunchResult
         val launchImage = argument?.launchImageUrl
         val launchName = argument?.launchName
-
-
 
         setUpToolbar(launchImage , launchName)
         setUpUi(launchItem)
@@ -72,7 +66,7 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
                 setUpProbability(it.probability)
 
                 //status
-                setUpStatusType(it.status?.id)
+                setUpStatusType(it.status?.id , it)
 
                 //startup timer
                 setTimer(it.launchDate)
@@ -104,17 +98,36 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
         }
     }
 
-    private fun setUpStatusType(statusId: Int?) {
+    private fun setUpStatusType(statusId: Int?, launchList: LaunchList) {
         if(statusId == 1){
             binding.launchStatusTv.setTextColor(resources.getColor(R.color.starting_progress_color))
         }else if(statusId == 3){
-            binding.launchStatusTv.setTextColor(Color.GREEN)
-            binding.countDownTv.isGone = true
+            binding.apply {
+                alternateDataTxt.isVisible = true
+                alternateStatusTxt.isVisible = true
+                alternateStatusTxt.text = launchList.status?.name
+                alternateDataTxt.text = launchList.createdDateFormatted
+                alternateStatusTxt.setTextColor(Color.GREEN)
+                dateTvCard.isVisible = false
+                countDownTv.isGone = true
+                daysHrsTxt.isVisible = false
+                launchStatusTv.isVisible = false
+            }
+
 
         }else if (statusId == 4){
-            binding.launchStatusTv.setTextColor(Color.RED)
-            binding.countDownTv.isGone = true
 
+            binding.apply {
+                alternateDataTxt.isVisible = true
+                alternateStatusTxt.isVisible = true
+                alternateStatusTxt.text = launchList.status?.name
+                alternateDataTxt.text = launchList.createdDateFormatted
+                alternateStatusTxt.setTextColor(Color.RED)
+                countDownTv.isGone = true
+                dateTvCard.isVisible = false
+                daysHrsTxt.isVisible = false
+                launchStatusTv.isVisible = false
+            }
         }
     }
 
