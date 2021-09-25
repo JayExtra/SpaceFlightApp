@@ -29,4 +29,12 @@ class LaunchRepository @Inject constructor(
     suspend fun getAgency(id : Int) = safeApiCall {
         api.getAgency(id)
     }
+
+    /**
+     * This will a rocket instance for the rocket details fragment
+     * **/
+
+    suspend fun getRocket(id : Int) = safeApiCall {
+        api.getRocketInstance(id)
+    }
 }

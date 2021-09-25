@@ -32,6 +32,13 @@
         <argument
             android:name="launch_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_launchDetailsFragment_to_rocketFragment"
+            app:destination="@id/rocketFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/previousFragment"
@@ -43,4 +50,13 @@
         android:name="com.dev.james.launchlibraryapi.features.ui.UpcomingFragment"
         android:label="fragment_upcoming_launches"
         tools:layout="@layout/fragment_upcoming_launches" />
+    <fragment
+        android:id="@+id/rocketFragment"
+        android:name="com.dev.james.launchlibraryapi.features.ui.RocketFragment"
+        android:label="fragment_rocket_config"
+        tools:layout="@layout/fragment_rocket_config" >
+        <argument
+            android:name="rocket_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

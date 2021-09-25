@@ -9,6 +9,7 @@ import androidx.paging.cachedIn
 import com.dev.james.launchlibraryapi.features.repositories.LaunchRepository
 import com.dev.james.launchlibraryapi.models.Agency
 import com.dev.james.launchlibraryapi.models.LaunchList
+import com.dev.james.launchlibraryapi.models.RocketInstance
 import com.dev.james.launchlibraryapi.utils.Event
 import com.dev.james.launchlibraryapi.utils.NetworkResource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,6 +27,10 @@ class LaunchListViewModel @Inject constructor(
         MutableLiveData()
     val agencyResponse get() = _agencyResponse
 
+    private val _rocketResponse : MutableLiveData<Event<NetworkResource<RocketInstance>>>
+        = MutableLiveData()
+    val rocketResponse get() = _rocketResponse
+
     var fragmentId : Int? = null
 
 
@@ -36,6 +41,12 @@ class LaunchListViewModel @Inject constructor(
     fun getAgency(id : Int ) = viewModelScope.launch {
         _agencyResponse.value = Event(NetworkResource.Loading)
         _agencyResponse.value = Event(repository.getAgency(id))
+    }
+
+
+    fun getRocket(id: Int) = viewModelScope.launch {
+        _rocketResponse.value = Event(NetworkResource.Loading)
+        _rocketResponse.value = Event(repository.getRocket(id))
     }
 }
 

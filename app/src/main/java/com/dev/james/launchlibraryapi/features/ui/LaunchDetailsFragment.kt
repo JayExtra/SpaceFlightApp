@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dev.james.launchlibraryapi.R
@@ -147,9 +148,18 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
 
                 //startup timer
                 setTimer(it.launchDate)
-
-
-
+                val rocketId = it.rocket?.configuration?.id
+                //card actions
+                rocketCard.setOnClickListener {
+                    val action = rocketId?.let { id ->
+                        LaunchDetailsFragmentDirections.actionLaunchDetailsFragmentToRocketFragment(
+                            id
+                        )
+                    }
+                    if (action != null) {
+                        findNavController().navigate(action)
+                    }
+                }
 
             }
         }
