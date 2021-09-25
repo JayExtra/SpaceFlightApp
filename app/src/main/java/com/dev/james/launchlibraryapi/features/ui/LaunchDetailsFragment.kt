@@ -3,21 +3,29 @@ package com.dev.james.launchlibraryapi.features.ui
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dev.james.launchlibraryapi.R
 import com.dev.james.launchlibraryapi.databinding.LaunchDetailsBinding
+import com.dev.james.launchlibraryapi.features.viewmodels.LaunchListViewModel
+import com.dev.james.launchlibraryapi.models.Agency
 import com.dev.james.launchlibraryapi.models.LaunchList
+import com.dev.james.launchlibraryapi.utils.NetworkResource
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
@@ -25,6 +33,8 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
     private lateinit var binding : LaunchDetailsBinding
     private val args = LaunchDetailsFragmentArgs
     var countDownTimer: CountDownTimer? = null
+    private val viewModel : LaunchListViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = LaunchDetailsBinding.bind(view)
@@ -36,7 +46,74 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
 
         setUpToolbar(launchImage , launchName)
         setUpUi(launchItem)
+        observeAgencyType()
+        getAgency(launchItem)
 
+    }
+
+    private fun getAgency(launchItem: LaunchList?) {
+        launchItem?.serviceProvider?.id?.let {
+            //Toast.makeText(requireContext(), "id: $it ", Toast.LENGTH_LONG).show()
+            viewModel.getAgency(it)
+        }
+    }
+
+    private fun observeAgencyType() {
+        viewModel.agencyResponse.observe(viewLifecycleOwner , { event ->
+            event.getContentIfNotHandled()?.let { resource ->
+                when(resource){
+                    is NetworkResource.Loading -> {
+                        binding.apply {
+                            progressBarAgencyImage.isVisible = true
+                        }
+                    }
+                    is NetworkResource.Success -> {
+
+                        val agency = resource.value
+                        binding.apply {
+                            progressBarAgencyImage.isInvisible = true
+                            totalLaunchesTxt.text = agency.totalLaunch.toString()
+                            successfulLaunches.text = agency.successfulLaunches.toString()
+                            failedLaunchesTxt.text = agency.failedLaunches.toString()
+                            landingsTxt.text = agency.successfulLandings.toString()
+
+                            if(agency.name.length > 20) {
+                                agencyName.text = agency.abbrev
+                            }else{
+                                agencyName.text = agency.name
+                            }
+
+                            setUpAgencySuccesRateProgressBar(agency.successfulLaunches , agency.totalLaunch)
+
+
+                        }
+                        loadAgencyLogo(resource.value)
+                    }
+                    is NetworkResource.Failure ->{
+                        Toast.makeText(requireContext(), resource.errBody.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
+        })
+    }
+
+    private fun setUpAgencySuccesRateProgressBar(successfulLaunches: Int, totalLaunch: Int) {
+        val percentage = calculateSuccessRate(totalLaunch, successfulLaunches).roundToInt()
+        binding.apply {
+            successRateBar.progress = percentage
+            successRateTxt.text = "$percentage%"
+        }
+    }
+
+    private fun loadAgencyLogo(value: Agency) {
+
+        Log.d("DetailsFragment", "loadAgencyLogo: logo is ${value.logo}")
+        Glide.with(binding.root)
+            .load(value.logo)
+            .placeholder(R.drawable.rocket)
+            .centerCrop()
+            .into(binding.agencyImage)
     }
 
     private fun setUpUi(launchItem: LaunchList?) {
@@ -72,8 +149,14 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
                 setTimer(it.launchDate)
 
 
+
+
             }
         }
+    }
+
+    private fun calculateSuccessRate(t: Int, s: Int): Float {
+        return (s.toFloat() / t.toFloat()) * 100
     }
 
     private fun setUpProbability(probability: Int?) {
@@ -85,8 +168,11 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
                }
             }else{
                 binding.apply {
-                    probabilityBar.progress = it
-                    percentageText.text = "$it%"
+
+                        probabilityBar.progress = it
+                        percentageText.text = "$it%"
+
+
                 }
             }
         }?:alternateProbability()

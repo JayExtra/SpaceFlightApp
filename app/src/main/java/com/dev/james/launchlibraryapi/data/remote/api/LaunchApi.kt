@@ -1,7 +1,9 @@
 package com.dev.james.launchlibraryapi.data.remote.api
 
+import com.dev.james.launchlibraryapi.models.Agency
 import com.dev.james.launchlibraryapi.models.Launch
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface LaunchApi {
@@ -31,4 +33,10 @@ interface LaunchApi {
         @Query("limit") limit : Int?,
         @Query("offset") offset : Int?
     ) : Launch
+
+    @GET("agencies/{id}")
+    suspend fun getAgency(
+        @Path("id") id : Int
+    ) : Agency
+
 }

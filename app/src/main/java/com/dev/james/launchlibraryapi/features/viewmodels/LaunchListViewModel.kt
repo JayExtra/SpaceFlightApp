@@ -7,7 +7,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dev.james.launchlibraryapi.features.repositories.LaunchRepository
+import com.dev.james.launchlibraryapi.models.Agency
 import com.dev.james.launchlibraryapi.models.LaunchList
+import com.dev.james.launchlibraryapi.utils.Event
+import com.dev.james.launchlibraryapi.utils.NetworkResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -19,6 +22,10 @@ class LaunchListViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+    private val _agencyResponse : MutableLiveData<Event<NetworkResource<Agency>>> =
+        MutableLiveData()
+    val agencyResponse get() = _agencyResponse
+
     var fragmentId : Int? = null
 
 
@@ -26,10 +33,9 @@ class LaunchListViewModel @Inject constructor(
 
     val launchListPrevious = repository.getLaunches(0).cachedIn(viewModelScope)
 
-
-    companion object{
-        const val UPCOMING_FRAGMENT_ID = 1
-        const val DEFAULT_FRAGMENT_ID = 0
+    fun getAgency(id : Int ) = viewModelScope.launch {
+        _agencyResponse.value = Event(NetworkResource.Loading)
+        _agencyResponse.value = Event(repository.getAgency(id))
     }
 }
 
