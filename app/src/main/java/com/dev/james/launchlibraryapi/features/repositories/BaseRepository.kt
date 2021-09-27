@@ -16,7 +16,7 @@ open class BaseRepository {
             try {
                 NetworkResource.Success(apiCall.invoke())
             } catch (exception : Exception){
-                Log.d("ProblemHere", "safeApiCall: ${exception.toString()}")
+                Log.d("ProblemHere", "safeApiCall: $exception")
                 when(exception){
                     is HttpException -> {
                         NetworkResource.Failure(

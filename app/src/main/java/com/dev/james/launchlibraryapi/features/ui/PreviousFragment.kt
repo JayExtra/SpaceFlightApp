@@ -19,7 +19,6 @@ import com.dev.james.launchlibraryapi.features.viewmodels.LaunchListViewModel
 import com.dev.james.launchlibraryapi.models.LaunchList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -45,10 +44,7 @@ class PreviousFragment : Fragment(R.layout.fragment_previous_launches) {
        }
     }
 
-    private val TAG ="PreviousFragment"
     private var hasLoadedData : Boolean = false
-    private var submitEmptyList : Boolean = true
-    private var job : Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPreviousLaunchesBinding.bind(view)
@@ -95,7 +91,7 @@ class PreviousFragment : Fragment(R.layout.fragment_previous_launches) {
                 }
                 if (launchListAdapter.snapshot().isEmpty()) {
                     error?.let {
-                        Log.d(TAG, "setUpAdapter: ${it.toString()}")
+                        Log.d("PreviousFragment", "setUpAdapter: $it")
                         binding.errorTxt.visibility = View.VISIBLE
                         binding.errorTxt.text = it.toString()
                         binding.netImageError.visibility = View.VISIBLE

@@ -62,7 +62,7 @@ class RocketFragment : Fragment(R.layout.fragment_rocket_config) {
                     }
 
                     is NetworkResource.Success -> {
-                        var rocket = response.value
+                        val rocket = response.value
                         binding.apply {
                             progressRocketImage.isInvisible = true
                             statsCard.isVisible = true

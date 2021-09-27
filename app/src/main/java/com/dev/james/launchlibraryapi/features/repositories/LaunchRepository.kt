@@ -2,12 +2,14 @@ package com.dev.james.launchlibraryapi.features.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.dev.james.launchlibraryapi.data.local.Dao
 import com.dev.james.launchlibraryapi.data.paging.LaunchDataSource
 import com.dev.james.launchlibraryapi.data.remote.api.LaunchApi
 import javax.inject.Inject
 
 class LaunchRepository @Inject constructor(
-    private val api : LaunchApi
+    private val api : LaunchApi,
+    private val dao : Dao
 ) : BaseRepository(){
 
     /**
@@ -37,4 +39,11 @@ class LaunchRepository @Inject constructor(
     suspend fun getRocket(id : Int) = safeApiCall {
         api.getRocketInstance(id)
     }
+
+    /**
+     * This will a orbit instance for the launch details fragment
+     * **/
+
+    //get orbit specified
+    suspend fun getOrbit(id: Int) = dao.getOrbit(id)
 }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
-        android:text="retry"
+        android:text="@string/retry_button_text"
         android:textColor="@color/midnight_black"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.120000005"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:contentDescription="@string/network_error_image" />
 
     <ProgressBar
         android:id="@+id/progressPrevious"
@@ -53,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="There is a problem with your network."
+        android:text="@string/network_error_text"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

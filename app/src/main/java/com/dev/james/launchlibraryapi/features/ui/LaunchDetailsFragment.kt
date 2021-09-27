@@ -1,13 +1,14 @@
 package com.dev.james.launchlibraryapi.features.ui
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -22,7 +23,11 @@ import com.dev.james.launchlibraryapi.databinding.LaunchDetailsBinding
 import com.dev.james.launchlibraryapi.features.viewmodels.LaunchListViewModel
 import com.dev.james.launchlibraryapi.models.Agency
 import com.dev.james.launchlibraryapi.models.LaunchList
+import com.dev.james.launchlibraryapi.models.Orbit
+import com.dev.james.launchlibraryapi.models.OrbitRoom
 import com.dev.james.launchlibraryapi.utils.NetworkResource
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -33,8 +38,9 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
 
     private lateinit var binding : LaunchDetailsBinding
     private val args = LaunchDetailsFragmentArgs
-    var countDownTimer: CountDownTimer? = null
+    private var countDownTimer: CountDownTimer? = null
     private val viewModel : LaunchListViewModel by activityViewModels()
+    private var missionOrbit : OrbitRoom? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +55,17 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
         setUpUi(launchItem)
         observeAgencyType()
         getAgency(launchItem)
+        observeOrbitType()
 
+    }
+
+    private fun observeOrbitType() {
+        viewModel.orbit.observe(viewLifecycleOwner , { event ->
+            event.getContentIfNotHandled()?.let { orbit ->
+                missionOrbit = orbit
+                Log.d("MyOrbit", "observeOrbitType: ${orbit.description}")
+            }
+        })
     }
 
     private fun getAgency(launchItem: LaunchList?) {
@@ -84,7 +100,7 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
                                 agencyName.text = agency.name
                             }
 
-                            setUpAgencySuccesRateProgressBar(agency.successfulLaunches , agency.totalLaunch)
+                            setUpAgencySuccessRateProgressBar(agency.successfulLaunches , agency.totalLaunch)
 
 
                         }
@@ -99,7 +115,7 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
         })
     }
 
-    private fun setUpAgencySuccesRateProgressBar(successfulLaunches: Int, totalLaunch: Int) {
+    private fun setUpAgencySuccessRateProgressBar(successfulLaunches: Int, totalLaunch: Int) {
         val percentage = calculateSuccessRate(totalLaunch, successfulLaunches).roundToInt()
         binding.apply {
             successRateBar.progress = percentage
@@ -118,6 +134,10 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
     }
 
     private fun setUpUi(launchItem: LaunchList?) {
+
+        launchItem?.let {
+            it.mission?.orbit?.id?.let { id -> viewModel.getOrbit(id) }
+        }
         binding.apply {
             launchItem?.let {
                 rocketTxt.text = it.rocket?.configuration?.name
@@ -160,9 +180,39 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
                         findNavController().navigate(action)
                     }
                 }
+                val orbit = it.mission?.orbit
+                orbitCard.setOnClickListener {
+                    orbit?.let { orbit ->
+                        showDialog(orbit)
+                    }?: Snackbar.make(binding.root , getString(R.string.mission_orbit_warning_message), Snackbar.LENGTH_SHORT).show()
+                }
 
+                launchLocationCard.setOnClickListener { _ ->
+
+                    showMap(it.pad.latitude , it.pad.longitude)
+
+                }
             }
         }
+    }
+
+    private fun showMap(latitude: String, longitude: String) {
+        val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
+    }
+
+    private fun showDialog(orbit: Orbit) {
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(orbit.name)
+            .setMessage(missionOrbit?.description)
+            .setPositiveButton(getString(R.string.okay_dialog_button)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+
     }
 
     private fun calculateSuccessRate(t: Int, s: Int): Float {
@@ -190,45 +240,58 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
     private fun alternateProbability(){
         binding.apply {
             probabilityBar.progress = 10
-            percentageText.text = "10%"
+            percentageText.text = getString(R.string.default_percentage)
         }
     }
 
     private fun setUpStatusType(statusId: Int?, launchList: LaunchList) {
-        if(statusId == 1){
-            binding.launchStatusTv.setTextColor(resources.getColor(R.color.starting_progress_color))
-        }else if(statusId == 3){
-            binding.apply {
-                alternateDataTxt.isVisible = true
-                alternateStatusTxt.isVisible = true
-                alternateStatusTxt.text = launchList.status?.name
-                alternateDataTxt.text = launchList.createdDateFormatted
-                alternateStatusTxt.setTextColor(Color.GREEN)
-                dateTvCard.isVisible = false
-                countDownTv.isGone = true
-                daysHrsTxt.isVisible = false
-                launchStatusTv.isVisible = false
+        when (statusId) {
+            1 -> {
+                binding.launchStatusTv.setTextColor(resources.getColor(R.color.starting_progress_color))
             }
+            3 -> {
+                binding.apply {
+                    alternateDataTxt.isVisible = true
+                    alternateStatusTxt.isVisible = true
+                    alternateStatusTxt.text = launchList.status?.name
+                    alternateDataTxt.text = launchList.createdDateFormatted
+                    alternateStatusTxt.setTextColor(Color.GREEN)
+                    dateTvCard.isVisible = false
+                    countDownTv.isGone = true
+                    daysHrsTxt.isVisible = false
+                    launchStatusTv.isVisible = false
+                }
 
 
-        }else if (statusId == 4){
+            }
+            4 -> {
 
-            binding.apply {
-                alternateDataTxt.isVisible = true
-                alternateStatusTxt.isVisible = true
-                alternateStatusTxt.text = launchList.status?.name
-                alternateDataTxt.text = launchList.createdDateFormatted
-                alternateStatusTxt.setTextColor(Color.RED)
-                countDownTv.isGone = true
-                dateTvCard.isVisible = false
-                daysHrsTxt.isVisible = false
-                launchStatusTv.isVisible = false
+                binding.apply {
+                    launchList.fail?.let {
+                        if(it.isNotEmpty()){
+                            failureReasonTxt.isVisible = true
+                            failureReasonTxt.text = it
+                        }else{
+                            failureReasonTxt.isVisible = false
+                        }
+                    }
+
+                    alternateDataTxt.isVisible = true
+                    alternateStatusTxt.isVisible = true
+                    alternateStatusTxt.text = launchList.status?.name
+                    alternateDataTxt.text = launchList.createdDateFormatted
+                    alternateStatusTxt.setTextColor(Color.RED)
+                    countDownTv.isGone = true
+                    dateTvCard.isVisible = false
+                    daysHrsTxt.isVisible = false
+                    launchStatusTv.isVisible = false
+                }
             }
         }
     }
 
     private fun setUpToolbar(launchImage: String?, launchName: String?) {
-        val toolbar = binding.launchDetailsToolbar as Toolbar
+        val toolbar = binding.launchDetailsToolbar
         toolbar.elevation = 0.0F
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar!!.title = launchName
@@ -251,8 +314,8 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
 
     private fun setTimer(launchDate: Date) {
         val futureTimeMill = launchDate.time
-        val c_date = Calendar.getInstance().timeInMillis
-        var timeDiff = futureTimeMill - c_date
+        val cDate = Calendar.getInstance().timeInMillis
+        val timeDiff = futureTimeMill - cDate
 
         countDownTimer = object : CountDownTimer(timeDiff , 1000) {
             override fun onTick(millscUntilFinish: Long) {

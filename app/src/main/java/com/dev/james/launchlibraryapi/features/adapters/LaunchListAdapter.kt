@@ -81,8 +81,8 @@ class LaunchListAdapter(
 
         private fun setTimer(launchDate: Date, binding: LaunchCardBinding) {
            val futureTimeMill = launchDate.time
-            val c_date = Calendar.getInstance().timeInMillis
-            var timeDiff = futureTimeMill - c_date
+            val cDate = Calendar.getInstance().timeInMillis
+            val timeDiff = futureTimeMill - cDate
 
             countDownTimer = object : CountDownTimer(timeDiff , 1000) {
                 override fun onTick(millscUntilFinish: Long) {

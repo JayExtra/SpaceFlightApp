@@ -24,7 +24,7 @@
         android:layout_gravity="center"
         android:layout_weight="0"
         android:visibility="invisible"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonFooter"

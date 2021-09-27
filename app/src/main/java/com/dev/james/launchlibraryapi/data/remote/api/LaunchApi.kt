@@ -21,20 +21,6 @@ interface LaunchApi {
         @Query("offset") offset : Int?
     ) : Launch
 
-    @GET("launch/upcoming")
-    fun searchLaunchUpcoming(
-        @Query("search") query : String?,
-        @Query("limit") limit : Int?,
-         @Query("offset") offset : Int?
-    ) : Launch
-
-    @GET("launch/previous")
-    fun searchLaunchPrevious(
-        @Query("search") query : String?,
-        @Query("limit") limit : Int?,
-        @Query("offset") offset : Int?
-    ) : Launch
-
     @GET("agencies/{id}")
     suspend fun getAgency(
         @Path("id") id : Int

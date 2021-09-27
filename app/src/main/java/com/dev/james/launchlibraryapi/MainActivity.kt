@@ -3,10 +3,8 @@ package com.dev.james.launchlibraryapi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.dev.james.launchlibraryapi.databinding.ActivityMainBinding
-import com.dev.james.launchlibraryapi.databinding.FragmentPreviousLaunchesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
