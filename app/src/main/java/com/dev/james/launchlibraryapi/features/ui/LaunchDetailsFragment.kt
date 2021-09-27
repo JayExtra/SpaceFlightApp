@@ -1,6 +1,9 @@
 package com.dev.james.launchlibraryapi.features.ui
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -22,7 +25,11 @@ import com.dev.james.launchlibraryapi.databinding.LaunchDetailsBinding
 import com.dev.james.launchlibraryapi.features.viewmodels.LaunchListViewModel
 import com.dev.james.launchlibraryapi.models.Agency
 import com.dev.james.launchlibraryapi.models.LaunchList
+import com.dev.james.launchlibraryapi.models.Orbit
+import com.dev.james.launchlibraryapi.models.OrbitRoom
 import com.dev.james.launchlibraryapi.utils.NetworkResource
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -35,6 +42,7 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
     private val args = LaunchDetailsFragmentArgs
     var countDownTimer: CountDownTimer? = null
     private val viewModel : LaunchListViewModel by activityViewModels()
+    private var missionOrbit : OrbitRoom? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +57,17 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
         setUpUi(launchItem)
         observeAgencyType()
         getAgency(launchItem)
+        observeOrbitType()
 
+    }
+
+    private fun observeOrbitType() {
+        viewModel.orbit.observe(viewLifecycleOwner , { event ->
+            event.getContentIfNotHandled()?.let { orbit ->
+                missionOrbit = orbit
+                Log.d("MyOrbit", "observeOrbitType: ${orbit.description}")
+            }
+        })
     }
 
     private fun getAgency(launchItem: LaunchList?) {
@@ -118,6 +136,10 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
     }
 
     private fun setUpUi(launchItem: LaunchList?) {
+
+        launchItem?.let {
+            it.mission?.orbit?.id?.let { id -> viewModel.getOrbit(id) }
+        }
         binding.apply {
             launchItem?.let {
                 rocketTxt.text = it.rocket?.configuration?.name
@@ -160,9 +182,39 @@ class LaunchDetailsFragment : Fragment(R.layout.launch_details) {
                         findNavController().navigate(action)
                     }
                 }
+                val orbit = it.mission?.orbit
+                orbitCard.setOnClickListener {
+                    orbit?.let { orbit ->
+                        showDialog(orbit)
+                    }?: Snackbar.make(binding.root , "Mission has no specified orbit planned yet.", Snackbar.LENGTH_SHORT).show()
+                }
 
+                launchLocationCard.setOnClickListener { card ->
+
+                    showMap(it.pad.latitude , it.pad.longitude)
+
+                }
             }
         }
+    }
+
+    private fun showMap(latitude: String, longitude: String) {
+        val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
+    }
+
+    private fun showDialog(orbit: Orbit) {
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(orbit.name)
+            .setMessage(missionOrbit?.description)
+            .setPositiveButton("Okay") { dialog , which ->
+                dialog.dismiss()
+            }
+            .show()
+
     }
 
     private fun calculateSuccessRate(t: Int, s: Int): Float {
