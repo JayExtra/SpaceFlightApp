@@ -27,6 +27,10 @@ The app consists of one Activity and six fragments:
 
 If you like the project please give it a star, clone and customise it to your wish ,  also follow me on Twitter for any questions: @JamesTravor
 
+
 Demo:
-![Frame converted](https://user-images.githubusercontent.com/40741293/135634372-755c79a2-72b4-44ea-9585-5c2674306a42.mp4)
+https://user-images.githubusercontent.com/40741293/135635878-5a944245-369c-4f5a-a3cc-b480d85bb9c1.mp4
+
+
+
 
